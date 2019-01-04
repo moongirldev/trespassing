@@ -1,0 +1,24 @@
+{
+  "player": {
+    "name": "Solomon",
+    "description": "Total Dooffis",
+    "level": 0,
+    "maxHealth": 20,
+    "items": [{
+        "type": "weapon",
+        "name": "Sword",
+        "value": 50,
+        "damage": 5
+      },
+      {
+        "type": "food",
+        "name": "Apple",
+        "value": 0,
+        "health": 1
+      },
+      {
+
+      }
+    ]
+  }
+}

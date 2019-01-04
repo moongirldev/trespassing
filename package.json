@@ -1,0 +1,6 @@
+{
+  "main": "main.js",
+  "dependencies": {
+    "clui": "^0.3.6"
+  }
+}
