@@ -1,6 +1,7 @@
 {
   "main": "main.js",
   "dependencies": {
-    "clui": "^0.3.6"
+    "clui": "^0.3.6",
+    "nexe": "^2.0.0-rc.34"
   }
 }
