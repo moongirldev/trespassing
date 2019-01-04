@@ -2,9 +2,11 @@
     "player": {
         "name": "Solomon",
         "description": "Total Dooffis",
-        "level": 0,
-        "maxHealth": 20,
-        "health": 15,
+        "info": {
+            "level": 0,
+            "maxHealth": 20,
+            "health": 15
+        },
         "items": [{
                 "type": "weapon",
                 "name": "Sword",

@@ -2,52 +2,61 @@ const fs = require('fs');
 const CLI = require('clui');
 const clc = require('cli-color');
 
-let currentPlayer = {"player": null};
-
+let pl = {"player": null};
 //primary game functions
 const game_continue = function () {
-    load('save_data');
-    refresh();
+    let pl = load('save_data');
+    refreshInfo(pl);
+    
 }
 
 const load = function (save_file) {
     let rawdata_load = fs.readFileSync("./saves/" + save_file + '.json');
     let utf8_load = rawdata_load.toString('UTF8');
-    let json_load = JSON.parse(utf8_settings)
-    let currentPlayer = json_load.player;
-    console.log("Loaded")
+    let json_load = JSON.parse(utf8_load)
+    let player = json_load.player;
+    return player
+}
+
+const input = function () {
+    
 }
 //graphics rendering functions
 let outputBuffer = new CLI.LineBuffer({
     x: 0,
     y: 0,
-    width: console,
-    height: console
+    width: process.stdout.columns,
+    height: process.stdout.rows
 });
-const refresh = function () {
+const refreshInfo = function (pg) {
+    console.clear();
     let message = new CLI.Line(outputBuffer)
         .column('Title Placehole', 20, [clc.red])
         .column('Title Placehole', 20, [clc.cyan])
         .fill()
         .store();
-
-    let blankLine = new CLI.Line(outputBuffer)
+    for (i = 0; i < process.stdout.rows -10; i++) {
+        let blankLine = new CLI.Line(outputBuffer)
         .fill()
         .store();
+    };
 
-    let healthDisplay = new CLI.Line(outputBuffer)
-    .column(CLI.Gauge(currentPlayer.health, currentPlayer.maxHealth, 60))
+    let infoTitle = new CLI.Line(outputBuffer)
+    .padding(10)
+    .column(" Health ",30, [clc.white, clc.bgCyan])
+    .column("Level: " + pg.info.level)
     .fill()
     .store();
-    console.log(currentPlayer.health)
+
+    let infoGauge = new CLI.Line(outputBuffer)
+    .column(CLI.Gauge(pg.info.health, pg.info.maxHealth, 30, 10, pg.info.health + "/" + pg.info.maxHealth + " HP"))
+    .fill()
+    .store();
+    console.clear();
     outputBuffer.output();
 };
 
 
 
-let rawdata_settings = fs.readFileSync('settings.json');
-let utf8_settings = rawdata_settings.toString('UTF8');
-let json_settings = JSON.parse(utf8_settings)
-let player = json_settings.player
-
+console.log(console.width);
 game_continue('dungeon.map');
